@@ -13,6 +13,6 @@ func main() {
 
 	routes.RouterHandler(server)
 
-	server.Run(":8080")
+	server.Run(":8000")
 
 }
