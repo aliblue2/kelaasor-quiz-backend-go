@@ -6,30 +6,31 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/kelaasor-quiz/models"
+	"github.com/kelaasor-quiz/utils"
 )
 
 const temprorayPassword = "kelaasor.com/kelaasor-quiz"
 
-func SignupUserHandler(context *gin.Context) {
-	user := models.User{}
+// func SignupUserHandler(context *gin.Context) {
+// 	user := models.User{}
 
-	err := context.ShouldBindJSON(&user)
+// 	err := context.ShouldBindJSON(&user)
 
-	if err != nil {
-		context.JSON(http.StatusBadRequest, gin.H{"message": "email and passwor is required for signup"})
-		return
-	}
+// 	if err != nil {
+// 		context.JSON(http.StatusBadRequest, gin.H{"message": "email and passwor is required for signup"})
+// 		return
+// 	}
 
-	tempUser, err := user.Signup()
+// 	tempUser, err := user.Signup()
 
-	if err != nil {
-		context.JSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
-		return
-	}
+// 	if err != nil {
+// 		context.JSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
+// 		return
+// 	}
 
-	context.JSON(http.StatusCreated, gin.H{"user": tempUser})
+// 	context.JSON(http.StatusCreated, gin.H{"user": tempUser})
 
-}
+// }
 
 func LoginUserHandler(context *gin.Context) {
 	user := models.User{}
@@ -50,7 +51,9 @@ func LoginUserHandler(context *gin.Context) {
 
 	user.Id = userId
 
-	accesstoken, err := models.ValidateUserCreadentials(user.Phone, user.Password)
+	// accesstoken, err := models.ValidateUserCreadentials(user.Phone, user.Password)
+
+	accesstoken, err := utils.GenerateToken(user.Phone, user.Password, userId)
 
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
