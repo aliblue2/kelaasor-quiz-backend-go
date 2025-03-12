@@ -8,6 +8,8 @@ import (
 	"github.com/kelaasor-quiz/models"
 )
 
+const temprorayPassword = "kelaasor.com/kelaasor-quiz"
+
 func SignupUserHandler(context *gin.Context) {
 	user := models.User{}
 
@@ -32,11 +34,21 @@ func SignupUserHandler(context *gin.Context) {
 func LoginUserHandler(context *gin.Context) {
 	user := models.User{}
 	err := context.ShouldBindJSON(&user)
+	user.Password = temprorayPassword
 
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"message": "phone and password is requierd for login"})
 		return
 	}
+
+	userId, err := user.Signup()
+
+	if err != nil {
+		context.JSON(http.StatusInternalServerError, gin.H{"message": "cant signup user"})
+		return
+	}
+
+	user.Id = userId
 
 	accesstoken, err := models.ValidateUserCreadentials(user.Phone, user.Password)
 

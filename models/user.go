@@ -11,7 +11,7 @@ import (
 type User struct {
 	Id        int64     `json:"id" `
 	Phone     string    `json:"phone" binding:"required"`
-	Password  string    `json:"password" binding:"required"`
+	Password  string    `json:"password"`
 	CreatedAt time.Time `json:"created_at" `
 }
 

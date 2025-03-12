@@ -6,7 +6,6 @@ import (
 )
 
 func RouterHandler(server *gin.Engine) {
-	server.POST("/signup", SignupUserHandler)
 	server.POST("/login", LoginUserHandler)
 
 	server.GET("/quizzes", GetAllQuizzesHandler)
