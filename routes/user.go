@@ -51,8 +51,6 @@ func LoginUserHandler(context *gin.Context) {
 
 	user.Id = userId
 
-	// accesstoken, err := models.ValidateUserCreadentials(user.Phone, user.Password)
-
 	accesstoken, err := utils.GenerateToken(user.Phone, user.Password, userId)
 
 	if err != nil {
