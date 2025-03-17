@@ -24,7 +24,7 @@ func LoginUserHandler(context *gin.Context) {
 	userId, err := user.Signup()
 
 	if err != nil {
-		context.JSON(http.StatusInternalServerError, gin.H{"message": "cant signup user"})
+		context.JSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
 		return
 	}
 
