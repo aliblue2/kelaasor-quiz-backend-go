@@ -11,27 +11,6 @@ import (
 
 const temprorayPassword = "kelaasor.com/kelaasor-quiz"
 
-// func SignupUserHandler(context *gin.Context) {
-// 	user := models.User{}
-
-// 	err := context.ShouldBindJSON(&user)
-
-// 	if err != nil {
-// 		context.JSON(http.StatusBadRequest, gin.H{"message": "email and passwor is required for signup"})
-// 		return
-// 	}
-
-// 	tempUser, err := user.Signup()
-
-// 	if err != nil {
-// 		context.JSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
-// 		return
-// 	}
-
-// 	context.JSON(http.StatusCreated, gin.H{"user": tempUser})
-
-// }
-
 func LoginUserHandler(context *gin.Context) {
 	user := models.User{}
 	err := context.ShouldBindJSON(&user)
